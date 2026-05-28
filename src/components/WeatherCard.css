@@ -1,0 +1,253 @@
+.weather-card {
+  border-radius: 20px;
+  padding: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  user-select: none;
+}
+
+.weather-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.weather-card:focus-visible {
+  outline: 3px solid rgba(255,255,255,0.6);
+  outline-offset: 2px;
+}
+
+/* Background themes */
+.bg-clear {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+  box-shadow: 0 8px 24px rgba(247, 151, 30, 0.3);
+}
+.bg-cloudy {
+  background: linear-gradient(135deg, #4b6cb7, #7b8cde);
+  box-shadow: 0 8px 24px rgba(75, 108, 183, 0.3);
+}
+.bg-rain {
+  background: linear-gradient(135deg, #2980b9, #6dd5fa);
+  box-shadow: 0 8px 24px rgba(41, 128, 185, 0.3);
+}
+.bg-storm {
+  background: linear-gradient(135deg, #373b44, #4286f4);
+  box-shadow: 0 8px 24px rgba(55, 59, 68, 0.4);
+}
+.bg-snow {
+  background: linear-gradient(135deg, #83a4d4, #b6fbff);
+  box-shadow: 0 8px 24px rgba(131, 164, 212, 0.3);
+}
+.bg-mist {
+  background: linear-gradient(135deg, #606c88, #3f4c6b);
+  box-shadow: 0 8px 24px rgba(96, 108, 136, 0.3);
+}
+
+/* Subtle pattern overlay */
+.weather-card::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  pointer-events: none;
+}
+.weather-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: -20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  pointer-events: none;
+}
+
+/* Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.city-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.city-name {
+  font-family: 'DM Serif Display', 'Georgia', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+}
+
+.country-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(4px);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  width: fit-content;
+}
+
+.header-right {
+  display: flex;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.temp-main {
+  font-family: 'DM Serif Display', 'Georgia', serif;
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.unit-label {
+  font-size: 18px;
+  font-weight: 300;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* Middle section */
+.card-middle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.weather-icon {
+  width: 52px;
+  height: 52px;
+  margin: -8px -4px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+  flex-shrink: 0;
+}
+
+.middle-info {
+  flex: 1;
+}
+
+.description {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+.feels-like {
+  margin: 2px 0 0;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.temp-range {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 13px;
+}
+
+.temp-high { opacity: 0.9; }
+.temp-low { opacity: 0.65; }
+
+/* Stats row */
+.stats-row {
+  display: flex;
+  gap: 0;
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 6px;
+  gap: 2px;
+}
+
+.stat + .stat {
+  border-left: 1px solid rgba(255,255,255,0.15);
+}
+
+.stat-icon { font-size: 14px; }
+.stat-value { font-size: 13px; font-weight: 600; }
+.stat-label { font-size: 10px; opacity: 0.75; text-align: center; }
+
+/* Expanded */
+.expanded-section {
+  cursor: default;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255,255,255,0.2);
+  margin: 14px 0;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.detail-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  opacity: 0.65;
+}
+
+.detail-value {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.updated-row {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.updated-text {
+  font-size: 11px;
+  opacity: 0.55;
+}
+
+/* Expand hint */
+.expand-hint {
+  text-align: center;
+  font-size: 11px;
+  margin-top: 12px;
+  opacity: 0.5;
+  letter-spacing: 0.3px;
+}
