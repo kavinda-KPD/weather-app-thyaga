@@ -7,11 +7,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
-# Copy source
+# Copy source 
 COPY . .
 
 # VITE_ vars must be available at build time
-# They are passed in via docker-compose build args
+# They are passed in via docker-compose build args 
 ARG VITE_WEATHER_API_KEY
 ENV VITE_WEATHER_API_KEY=$VITE_WEATHER_API_KEY
 

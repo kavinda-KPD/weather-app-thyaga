@@ -141,7 +141,7 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
-        Powered by <a href="https://openweathermap.org" target="_blank" rel="noreferrer">OpenWeatherMap</a>
+        Powered by Kavinda dissanayake
       </footer>
     </div>
   );
