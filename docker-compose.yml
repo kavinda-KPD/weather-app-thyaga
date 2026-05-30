@@ -1,0 +1,13 @@
+services:
+  weather-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Pass the API key from your shell environment or a .env file
+        # Usage:  VITE_WEATHER_API_KEY=yourkey docker compose up --build
+        # Or:     add VITE_WEATHER_API_KEY=yourkey to a .env file next to this file
+        VITE_WEATHER_API_KEY: ${VITE_WEATHER_API_KEY}
+    ports:
+      - "3000:3000" # Access the app at http://localhost:3000
+    restart: unless-stopped

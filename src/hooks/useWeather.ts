@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import { useState, useCallback } from "react";
 import { CityWeather } from "../types/weather";
 
@@ -5,7 +6,6 @@ const API_KEY = import.meta.env.VITE_WEATHER_API_KEY as string;
 const BASE_V25 = "https://api.openweathermap.org/data/2.5";
 const BASE_V30 = "https://api.openweathermap.org/data/3.0/onecall";
 
-// ── One Call 3.0 response shape ───────────────────────────────────────────────
 interface OneCallCurrent {
   dt: number;
   sunrise: number;
@@ -28,7 +28,6 @@ interface OneCallResponse {
   current: OneCallCurrent;
 }
 
-// ── 2.5/weather response (used only to resolve city ID → lat/lon/name) ────────
 interface V25WeatherBase {
   id: number;
   name: string;
@@ -46,7 +45,6 @@ export interface UseWeatherReturn {
   lastFetchedIds: number[];
 }
 
-/** Build a CityWeather object from a 2.5 base + One Call 3.0 current data */
 function buildCityWeather(
   base: V25WeatherBase,
   oc: OneCallResponse,
@@ -81,7 +79,6 @@ function buildCityWeather(
   };
 }
 
-/** Fetch One Call 3.0 for a given lat/lon */
 async function fetchOneCall(
   lat: number,
   lon: number,
@@ -99,7 +96,6 @@ async function fetchOneCall(
   return res.json();
 }
 
-/** Resolve a city ID to its base metadata via 2.5/weather */
 async function resolveCityById(id: number): Promise<V25WeatherBase> {
   const url = `${BASE_V25}/weather?id=${id}&units=metric&appid=${API_KEY}`;
   const res = await fetch(url);
@@ -113,7 +109,6 @@ async function resolveCityById(id: number): Promise<V25WeatherBase> {
   return res.json();
 }
 
-/** Resolve a city name to its base metadata via 2.5/weather */
 async function resolveCityByName(cityName: string): Promise<V25WeatherBase> {
   const url = `${BASE_V25}/weather?q=${encodeURIComponent(cityName)}&units=metric&appid=${API_KEY}`;
   const res = await fetch(url);
@@ -130,17 +125,10 @@ export function useWeather(): UseWeatherReturn {
   const [error, setError] = useState<string | null>(null);
   const [lastFetchedIds, setLastFetchedIds] = useState<number[]>([]);
 
-  /**
-   * For each city ID:
-   *   1. Resolve lat/lon via data/2.5/weather?id=
-   *   2. Call One Call 3.0 with those coords
-   * Runs all requests concurrently.
-   */
   const fetchCities = useCallback(async (ids: number[]) => {
     setLoading(true);
     setError(null);
     setLastFetchedIds(ids);
-
     try {
       const results = await Promise.all(
         ids.map(async (id) => {
@@ -159,11 +147,6 @@ export function useWeather(): UseWeatherReturn {
     }
   }, []);
 
-  /**
-   * Add a city by name:
-   *   1. Resolve via data/2.5/weather?q=
-   *   2. Call One Call 3.0 with returned coords
-   */
   const fetchSingleCity = useCallback(
     async (cityName: string): Promise<CityWeather | null> => {
       const base = await resolveCityByName(cityName);

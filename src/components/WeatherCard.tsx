@@ -75,7 +75,7 @@ export default function WeatherCard({ data }: Props) {
         </div>
       </div>
 
-      {/* Stats row (always visible) */}
+      {/* Stats row */}
       <div className="stats-row">
         <div className="stat">
           <span className="stat-icon">💧</span>
@@ -84,7 +84,7 @@ export default function WeatherCard({ data }: Props) {
         </div>
         <div className="stat">
           <span className="stat-icon">💨</span>
-          <span className="stat-value">{main.wind_speed !== undefined ? Math.round(wind.speed * 10) / 10 : wind.speed} m/s</span>
+          <span className="stat-value">{Math.round(wind.speed * 10) / 10} m/s</span>
           <span className="stat-label">Wind {getWindDirection(wind.deg)}</span>
         </div>
         <div className="stat">
@@ -98,7 +98,6 @@ export default function WeatherCard({ data }: Props) {
       {expanded && (
         <div className="expanded-section" onClick={(e) => e.stopPropagation()}>
           <div className="divider" />
-
           <div className="detail-grid">
             <div className="detail-item">
               <span className="detail-label">Pressure</span>
@@ -125,7 +124,6 @@ export default function WeatherCard({ data }: Props) {
               <span className="detail-value">{formatTime(sys.sunset)}</span>
             </div>
           </div>
-
           <div className="updated-row">
             <span className="updated-text">
               Updated {formatDate(dt)} at {formatTime(dt)}
